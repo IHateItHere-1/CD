@@ -1,0 +1,22 @@
+version: "3.7"
+
+services:
+  app:
+    image: "flask-app"
+    ports:
+      - 5000:5000
+
+  mysql:
+    image: mysql:5.7
+    volumes:
+      - todo-mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: Pass
+      MYSQL_DATABASE: SQLDB
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./SQL:/docker-entrypoint-initdb.d/:ro
+
+volumes:
+  todo-mysql-data:
